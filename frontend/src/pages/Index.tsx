@@ -73,37 +73,30 @@ const Index = () => {
         <p className="text-muted-foreground text-center mb-8">
           Discover nearby places along your route
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
           <FindCard
             title="Lodge"
             description="Find accommodations near you"
             icon="hotel"
-            onClick={() => console.log("Find Lodge - Feature coming soon!")}
+            onClick={() => navigate("/places")}
           />
           <FindCard
             title="Hospitals"
             description="Locate nearby medical facilities"
             icon="hospital"
-            onClick={() => console.log("Find Hospitals - Feature coming soon!")}
+            onClick={() => navigate("/places")}
           />
           <FindCard
             title="ATM / Banks"
             description="Find ATMs and banking services"
             icon="bank"
-            onClick={() => console.log("Find ATM/Banks - Feature coming soon!")}
+            onClick={() => navigate("/places")}
           />
           <FindCard
             title="Restaurants"
             description="Discover dining options"
             icon="restaurant"
-            onClick={() => console.log("Find Restaurants - Feature coming soon!")}
-          />
-        </div>
-        <div className="max-w-2xl mx-auto">
-          <input
-            type="text"
-            placeholder="Search e.g. grocery"
-            className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            onClick={() => navigate("/places")}
           />
         </div>
       </section>
