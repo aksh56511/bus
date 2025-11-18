@@ -38,6 +38,7 @@ app.get('/api/db-check', async (req, res) => {
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/trips', require('./routes/tripRoutes'));
 app.use('/api/buses', require('./routes/busRoutes'));
+app.use('/api/routes', require('./routes/routeRoutes'));
 app.use('/api/places', require('./routes/placesRoutes'));
 app.use('/api/chatbot', require('./routes/chatbotRoutes'));
 

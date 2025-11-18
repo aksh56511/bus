@@ -4,8 +4,11 @@ import MapPlaceholder from "@/components/MapPlaceholder";
 import ChatbotPanel from "@/components/ChatbotPanel";
 import FindCard from "@/components/FindCard";
 import { Bus, Route, Clock, MapPin, TrendingUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+  
   const handleSearch = (query: string) => {
     console.log("Searching for:", query);
     // TODO: Implement search functionality with API
@@ -45,19 +48,19 @@ const Index = () => {
             title="Find a Route"
             description="Discover the best routes to your destination"
             icon="route"
-            onClick={() => console.log("Find Route")}
+            onClick={() => navigate("/routes")}
           />
           <FindCard
             title="Bus Schedules"
             description="View real-time schedules and arrivals"
             icon="bus"
-            onClick={() => console.log("Bus Schedules")}
+            onClick={() => navigate("/routes")}
           />
           <FindCard
             title="Plan Your Trip"
             description="Get step-by-step directions for your journey"
             icon="time"
-            onClick={() => console.log("Plan Trip")}
+            onClick={() => navigate("/trips")}
           />
         </div>
       </section>
@@ -75,25 +78,25 @@ const Index = () => {
             title="Lodge"
             description="Find accommodations near you"
             icon="hotel"
-            onClick={() => console.log("Find Lodge")}
+            onClick={() => console.log("Find Lodge - Feature coming soon!")}
           />
           <FindCard
             title="Hospitals"
             description="Locate nearby medical facilities"
             icon="hospital"
-            onClick={() => console.log("Find Hospitals")}
+            onClick={() => console.log("Find Hospitals - Feature coming soon!")}
           />
           <FindCard
             title="ATM / Banks"
             description="Find ATMs and banking services"
             icon="bank"
-            onClick={() => console.log("Find ATM/Banks")}
+            onClick={() => console.log("Find ATM/Banks - Feature coming soon!")}
           />
           <FindCard
             title="Restaurants"
             description="Discover dining options"
             icon="restaurant"
-            onClick={() => console.log("Find Restaurants")}
+            onClick={() => console.log("Find Restaurants - Feature coming soon!")}
           />
         </div>
         <div className="max-w-2xl mx-auto">
