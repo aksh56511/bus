@@ -21,12 +21,13 @@ app.get('/api/db-check', async (req, res) => {
     const { sequelize } = require('./config/db');
     await sequelize.authenticate();
     res.json({ 
-      status: 'PostgreSQL connected',
-      storage: 'database'
+      status: 'SQLite database connected',
+      storage: 'database',
+      dialect: 'sqlite'
     });
   } catch (err) {
     res.json({ 
-      status: 'Using JSON storage (PostgreSQL not connected)',
+      status: 'Using JSON storage (SQLite not connected)',
       storage: 'json',
       message: 'Server is running normally with file-based storage'
     });

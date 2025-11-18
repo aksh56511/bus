@@ -30,11 +30,20 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Store auth token and user data
+        localStorage.setItem('authToken', data.token);
+        if (data.user) {
+          localStorage.setItem('userData', JSON.stringify(data.user));
+        }
+        
+        // Trigger storage event for other components to update
+        window.dispatchEvent(new Event('storage'));
+        
         toast({
           title: "Login successful!",
-          description: "Welcome back to Transit",
+          description: `Welcome back, ${data.user?.name || 'User'}!`,
         });
-        // TODO: Store auth token
+        // Redirect to home page
         navigate("/");
       } else {
         toast({
@@ -78,6 +87,7 @@ const Login = () => {
                 placeholder="your.email@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
                 required
               />
             </div>
@@ -90,6 +100,7 @@ const Login = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
                   required
                 />
                 <button

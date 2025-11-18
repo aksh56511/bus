@@ -1,12 +1,24 @@
-import { Bus, User, Menu } from "lucide-react";
+import { Bus, User, Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { isAuthenticated, getCurrentUser, logout, type User as UserType } from "@/utils/auth";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // TODO: Replace with actual auth state
-  const isAuthenticated = false;
+  const [authState, setAuthState] = useState(false);
+  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check authentication status on component mount and when location changes
+    const checkAuth = () => {
+      setAuthState(isAuthenticated());
+      setCurrentUser(getCurrentUser());
+    };
+
+    checkAuth();
+  }, [location]); // Re-run when location changes
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -28,13 +40,25 @@ const Navbar = () => {
             <Link to="/trips">
               <Button variant="ghost">Trips</Button>
             </Link>
-            {isAuthenticated ? (
-              <Link to="/profile">
-                <Button variant="default">
-                  <User className="h-4 w-4" />
-                  Profile
+            {authState ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  Welcome, {currentUser?.name}
+                </span>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    logout();
+                    // Force re-render by updating local state
+                    setAuthState(false);
+                    setCurrentUser(null);
+                  }}
+                >
+                  <LogOut className="h-4 w-4 mr-1" />
+                  Logout
                 </Button>
-              </Link>
+              </div>
             ) : (
               <div className="flex items-center gap-2">
                 <Link to="/login">
@@ -75,13 +99,25 @@ const Navbar = () => {
                 Trips
               </Button>
             </Link>
-            {isAuthenticated ? (
-              <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="default" className="w-full justify-start">
-                  <User className="h-4 w-4" />
-                  Profile
+            {authState ? (
+              <div className="space-y-2">
+                <div className="px-3 py-2 text-sm text-muted-foreground">
+                  Welcome, {currentUser?.name}
+                </div>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => {
+                    logout();
+                    setAuthState(false);
+                    setCurrentUser(null);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <LogOut className="h-4 w-4 mr-1" />
+                  Logout
                 </Button>
-              </Link>
+              </div>
             ) : (
               <>
                 <Link to="/login" onClick={() => setIsMenuOpen(false)}>
