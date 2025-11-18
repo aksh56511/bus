@@ -1,25 +1,24 @@
 const { Sequelize } = require('sequelize');
+const path = require('path');
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME || 'transit',
-  process.env.DB_USER || 'postgres',
-  process.env.DB_PASSWORD || 'password',
-  {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
-    logging: false
-  }
-);
+// SQLite database - stored in backend/data folder
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: path.join(__dirname, '../data/database.sqlite'),
+  logging: false
+});
 
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log('PostgreSQL connected');
+    console.log('SQLite database connected');
+    
+    // Sync all models with database
+    await sequelize.sync({ alter: true });
+    console.log('Database tables synced');
   } catch (err) {
-    console.warn('PostgreSQL connection error:', err.message);
+    console.warn('Database connection error:', err.message);
     console.warn('Continuing with JSON storage fallback...');
-    // Don't exit - allow app to continue with JSON storage
   }
 };
 
