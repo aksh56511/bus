@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import SearchBox from "@/components/SearchBox";
 import MapPlaceholder from "@/components/MapPlaceholder";
 import ChatbotPanel from "@/components/ChatbotPanel";
 import FindCard from "@/components/FindCard";
@@ -8,11 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
-  
-  const handleSearch = (query: string) => {
-    console.log("Searching for:", query);
-    // TODO: Implement search functionality with API
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -31,9 +25,6 @@ const Index = () => {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Find the fastest routes, track buses in real-time, and plan your trips with confidence
             </p>
-            <div className="max-w-2xl mx-auto pt-6">
-              <SearchBox onSearch={handleSearch} />
-            </div>
           </div>
         </div>
       </section>
