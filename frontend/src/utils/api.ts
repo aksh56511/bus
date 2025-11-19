@@ -1,6 +1,8 @@
 // API utility functions for communicating with the backend
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = import.meta.env.PROD 
+  ? '/api' // Use relative URL in production (Vercel)
+  : 'http://localhost:5000/api'; // Use localhost in development
 
 interface ApiResponse<T = any> {
   data?: T;

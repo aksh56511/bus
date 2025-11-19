@@ -9,6 +9,8 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import ChatbotPanel from "@/components/ChatbotPanel";
 
+const API_URL = import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
+
 interface RouteStop {
   stopId: string;
   order: number;
@@ -91,7 +93,7 @@ const Routes = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/routes/find?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
+        `${API_URL}/routes/find?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`
       );
 
       const data = await response.json();

@@ -1,0 +1,8 @@
+node_modules
+.git
+*.log
+.env
+.DS_Store
+backend/data/database.sqlite
+backend/data/database.sqlite-shm
+backend/data/database.sqlite-wal

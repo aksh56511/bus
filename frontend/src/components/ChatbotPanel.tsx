@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { useState, useRef, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 
+const API_URL = import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -50,7 +52,7 @@ const ChatbotPanel = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/chatbot/query", {
+      const response = await fetch(`${API_URL}/chatbot/query`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
